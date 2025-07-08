@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allie | Product Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ff4fa3;
+      --purple: #a259ff;
+      --pink-light: #ffe0f0;
+      --purple-light: #f3e8ff;
+      --white: #fff;
+      --glass: rgba(255,255,255,0.7);
+      --shadow: 0 8px 32px rgba(162,89,255,0.10);
+      --radius: 1.2rem;
+    }
+    html, body {
+      background: var(--white);
+      color: #2d2d2d;
+      font-family: 'Inter', 'Montserrat', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    /* Blended Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 16px rgba(162,89,255,0.08);
+      border-bottom: 3px solid;
+      border-image: linear-gradient(90deg, var(--pink), var(--purple)) 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 2.5rem;
+      z-index: 1000;
+      animation: navFadeIn 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    @media (max-width: 700px) {
+      nav {
+        padding: 0.7rem 1rem;
+      }
+    }
+    @keyframes navFadeIn {
+      from { opacity: 0; filter: blur(8px); }
+      to { opacity: 1; filter: blur(0); }
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 8px var(--pink-light);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.2rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav ul li a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+    }
+    nav ul li a:hover {
+      color: var(--pink-light);
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    /* Hero Section */
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle at 60% 40%, var(--pink) 0%, var(--purple) 100%);
+      opacity: 0.13;
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+    header.hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      text-align: center;
+      padding: 8rem 1rem 4rem 1rem;
+      z-index: 1;
+      overflow: visible;
+    }
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink) 60%, var(--purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.7rem;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 16px var(--pink-light);
+      border: 4px solid var(--white);
+      animation: fadeInDown 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1 {
+      font-size: 3.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1);
+      min-height: 3.5rem;
+      position: relative;
+    }
+    .typing {
+      border-right: 2.5px solid var(--pink);
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: blink-caret 0.8s step-end infinite;
+    }
+    @keyframes blink-caret {
+      0%, 100% { border-color: var(--pink); }
+      50% { border-color: transparent; }
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #4b2e5c;
+      background: rgba(255,255,255,0.7);
+      border-radius: 1rem;
+      padding: 0.7rem 1.2rem;
+      box-shadow: 0 2px 8px var(--purple-light);
+      animation: fadeIn 1.5s cubic-bezier(.4,0,.2,1);
+    }
+    .hero .btn {
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      color: #fff;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border-radius: 2rem;
+      font-size: 1.1rem;
+      text-decoration: none;
+      box-shadow: 0 2px 12px var(--pink-light);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      animation: fadeIn 1.7s cubic-bezier(.4,0,.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero .btn:hover {
+      background: #fff;
+      color: var(--pink);
+      transform: scale(1.05);
+      border: 2px solid var(--pink);
+    }
+    .hero .btn:active {
+      transform: scale(0.97);
+    }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.5s linear;
+      background: rgba(255,79,163,0.3);
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    /* Projects Section */
+    .projects-section {
+      padding: 5rem 0 4rem 0;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 1;
+      background: none;
+    }
+    .project-section {
+      max-width: 900px;
+      margin: 0 auto 3.5rem auto;
+      border-radius: 2rem;
+      box-shadow: 0 4px 32px rgba(162,89,255,0.10);
+      padding: 3rem 2rem 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      animation: fadeInUp 1.2s cubic-bezier(.4,0,.2,1);
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .project-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-section.pink {
+      background: linear-gradient(120deg, var(--pink-light) 80%, #fff 100%);
+      border-left: 8px solid var(--pink);
+    }
+    .project-section.purple {
+      background: linear-gradient(120deg, var(--purple-light) 80%, #fff 100%);
+      border-left: 8px solid var(--purple);
+    }
+    .project-title {
+      font-size: 2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      color: var(--pink);
+    }
+    .project-section.purple .project-title {
+      color: var(--purple);
+    }
+    .project-meta {
+      font-size: 1rem;
+      color: #6d5a99;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .project-tags {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: 1.1rem;
+      flex-wrap: wrap;
+    }
+    .project-tag {
+      background: #fff;
+      color: var(--pink);
+      border-radius: 1rem;
+      padding: 0.2rem 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1.5px solid var(--pink-light);
+      letter-spacing: 0.01em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .project-section.purple .project-tag {
+      color: var(--purple);
+      border: 1.5px solid var(--purple-light);
+    }
+    .project-desc {
+      font-size: 1.13rem;
+      margin-bottom: 1.1rem;
+      color: #3d2466;
+    }
+    .project-features {
+      margin-bottom: 1.2rem;
+      padding-left: 1.2rem;
+    }
+    .project-features li {
+      margin-bottom: 0.3rem;
+      font-size: 1.01rem;
+    }
+    .project-btn {
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      color: #fff;
+      font-weight: 700;
+      padding: 0.7rem 1.7rem;
+      border-radius: 2rem;
+      font-size: 1.05rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      box-shadow: 0 2px 12px var(--pink-light);
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    .project-btn:hover, .project-btn:focus {
+      background: #fff;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+      outline: none;
+      transform: scale(1.05);
+    }
+    .project-section.purple .project-btn:hover, .project-section.purple .project-btn:focus {
+      color: var(--purple);
+      border: 2px solid var(--purple);
+    }
+    @media (max-width: 700px) {
+      .project-section {
+        padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+      }
+      .project-title {
+        font-size: 1.3rem;
+      }
+    }
+    /* Testimonials Section */
+    .testimonials-section {
+      background: linear-gradient(120deg, #f8f6ff 60%, #fff 100%);
+      padding: 5rem 0 4rem 0;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .testimonials-section .section-title {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .testimonials-list {
+      display: flex;
+      flex-direction: row;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .testimonial-card {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 16px var(--purple-light);
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      min-width: 280px;
+      max-width: 340px;
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .testimonial-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .testimonial-quote-icon {
+      color: var(--purple);
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.7;
+    }
+    .testimonial-quote {
+      font-size: 1.13rem;
+      color: #3d2466;
+      font-style: italic;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      line-height: 1.6;
+      position: relative;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      color: var(--pink);
+      font-size: 1.05rem;
+      text-align: center;
+      margin-top: 0.2rem;
+    }
+    @media (max-width: 900px) {
+      .testimonials-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .testimonial-card {
+        min-width: 0;
+        max-width: 100%;
+      }
+    }
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, var(--purple-light) 60%, var(--pink-light) 100%);
+      color: #3d2466;
+      padding: 2.2rem 0 1.2rem 0;
+      margin-top: 3rem;
+      box-shadow: 0 -2px 16px var(--pink-light);
+      animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1);
+      font-size: 1rem;
+    }
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      padding: 0 2rem;
+    }
+    .footer-contact {
+      font-size: 1.05rem;
+      color: #3d2466;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .footer-links a {
+      color: #3d2466;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 50%;
+      transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+      font-size: 1.35rem;
+      opacity: 0.85;
+    }
+    .footer-links a:focus, .footer-links a:hover {
+      color: #fff;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      outline: none;
+      box-shadow: 0 2px 8px var(--pink-light);
+      opacity: 1;
+      transform: scale(1.12);
+    }
+    .footer-links svg {
+      width: 1.35rem;
+      height: 1.35rem;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.98rem;
+      color: #6d5a99;
+      margin-top: 1.2rem;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 700px) {
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+        padding: 0 1rem;
+      }
+      .footer-links {
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 700px) {
+      nav { padding: 0.7rem 1rem; }
+      .logo { font-size: 1.3rem; }
+      .hero h1 { font-size: 2rem; }
+      .projects-list { gap: 1.2rem; }
+      .project-card { padding: 1.2rem 0.7rem; }
+      .hero-bg { width: 320px; height: 320px; }
+    }
+    /* Animate hero background gradient */
+    .hero-bg {
+      animation: gradientMove 8s ease-in-out infinite alternate;
+    }
+    @keyframes gradientMove {
+      0% { background: radial-gradient(circle at 60% 40%, var(--pink) 0%, var(--purple) 100%); }
+      100% { background: radial-gradient(circle at 40% 60%, var(--purple) 0%, var(--pink) 100%); }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Allie</div>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="avatar">A</div>
+    <h1><span class="typing" id="typing"></span></h1>
+    <p>Hi! I'm Allie, a Service Recovery Analyst and Backend Engineer who is passionate about making technology accessible for everyone. I love building robust systems and ensuring digital experiences are inclusive and reliable.</p>
+    <a href="#projects" class="btn" id="mainBtn">View My Work</a>
+  </header>
+
+  <section id="projects" class="projects-section">
+    <div class="project-section pink" id="food-blog">
+      <div class="project-title">Food Blog Project – CISC 3140</div>
+      <div class="project-meta">Course Project &nbsp;|&nbsp; 2023</div>
+      <div class="project-tags">
+        <span class="project-tag">HTML</span>
+        <span class="project-tag">CSS</span>
+        <span class="project-tag">JavaScript</span>
+      </div>
+      <div class="project-desc">The Food Blog project is a simple website designed using basic HTML and JavaScript. It features a collection of recipes, cooking tips, and food-related articles that are displayed in an organized and user-friendly manner. The project demonstrates fundamental web development concepts and serves as an educational exercise in creating a static website.</div>
+      <ul class="project-features">
+        <li>Interactive event calendar with dynamic date highlighting</li>
+        <li>User-friendly online store with login, purchase, and payment forms</li>
+        <li>Attractive image gallery with rotating images</li>
+      </ul>
+      <a class="project-btn" href="#" tabindex="-1">Learn More</a>
+    </div>
+    <div class="project-section purple" id="gitpulse">
+      <div class="project-title">GitPulse</div>
+      <div class="project-meta">Team Project &nbsp;|&nbsp; August 2023</div>
+      <div class="project-tags">
+        <span class="project-tag">JavaScript</span>
+        <span class="project-tag">Accessibility</span>
+        <span class="project-tag">Teamwork</span>
+      </div>
+      <div class="project-desc">GitPulse was a dynamic, three-week project undertaken during TTP, where our team of eight was tasked with developing a comprehensive GitHub dashboard. As the accessibility engineer, I worked closely with the UI/UX manager to ensure the interface was intuitive, inclusive, and easy to navigate. GitPulse offers 15 key metrics, allowing users to monitor productivity trends and track open issues over time, providing valuable insights for effective project management.</div>
+      <ul class="project-features">
+        <li>15+ metrics for project management and productivity tracking</li>
+        <li>Accessible, responsive, and intuitive interface</li>
+      </ul>
+      <a class="project-btn" href="#" tabindex="-1">Learn More</a>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonials-section">
+    <h2 class="section-title">Testimonials</h2>
+    <div class="testimonials-list">
+      <div class="testimonial-card">
+        <div class="testimonial-quote-icon" aria-hidden="true">&#10077;</div>
+        <div class="testimonial-quote">Working with Allie was a dream. Their attention to user flow and aesthetics is unmatched.</div>
+        <div class="testimonial-author">— Jane Doe, Founder of Brew & Bloom</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-icon" aria-hidden="true">&#10077;</div>
+        <div class="testimonial-quote">From research to design, they nailed every step. Their visuals speak volumes.</div>
+        <div class="testimonial-author">— Mark Lin, CEO of ReShape</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-contact">Let’s connect! nafisa@example.com</div>
+      <div class="footer-links">
+        <!-- GitHub -->
+        <a href="https://github.com/AliAngelinaaa" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" 
+                  d="M12 0.5C5.37 0.5 0 5.87 0 12.5c0 5.28 3.438 9.77 8.205 11.36.6.113.82-.26.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.082-.729.082-.729 1.205.085 1.84 1.238 1.84 1.238 1.07 1.833 2.805 1.303 3.49.996.108-.775.42-1.303.763-1.602-2.665-.305-5.467-1.332-5.467-5.933 0-1.31.47-2.38 1.236-3.22-.124-.305-.536-1.532.117-3.19 0 0 1.008-.322 3.3 1.23a11.43 11.43 0 0 1 3-.405c1.02.005 2.047.138 3 .405 2.29-1.552 3.297-1.23 3.297-1.23.655 1.658.243 2.885.12 3.19.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.624-5.48 5.922.432.372.816 1.102.816 2.222v3.293c0 .32.216.694.825.576C20.565 22.267 24 17.78 24 12.5 24 5.87 18.63 0.5 12 0.5z"/>
+          </svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/nafisaanzum/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <!-- Email -->
+        <a href="mailto:nafisa@example.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4
+                     c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      © 2025 Nafisa Anzum. All rights reserved.
+    </div>
+  </footer>
+  <script>
+    // Typing animation for hero
+    const roles = ["Service Recovery Analyst", "Backend Engineer", "Accessibility Advocate"];
+    let roleIndex = 0, charIndex = 0, typing = true;
+    const typingEl = document.getElementById('typing');
+    function typeRole() {
+      if (!typingEl) return;
+      const role = roles[roleIndex];
+      if (typing) {
+        if (charIndex < role.length) {
+          typingEl.textContent = role.slice(0, ++charIndex);
+          setTimeout(typeRole, 80);
+        } else {
+          typing = false;
+          setTimeout(typeRole, 1200);
+        }
+      } else {
+        if (charIndex > 0) {
+          typingEl.textContent = role.slice(0, --charIndex);
+          setTimeout(typeRole, 30);
+        } else {
+          typing = true;
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeRole, 400);
+        }
+      }
+    }
+    typeRole();
+
+    // Button ripple effect
+    const btn = document.getElementById('mainBtn');
+    if (btn) {
+      btn.addEventListener('click', function(e) {
+        const circle = document.createElement('span');
+        circle.classList.add('ripple');
+        const rect = btn.getBoundingClientRect();
+        circle.style.left = (e.clientX - rect.left) + 'px';
+        circle.style.top = (e.clientY - rect.top) + 'px';
+        circle.style.width = circle.style.height = Math.max(rect.width, rect.height) + 'px';
+        btn.appendChild(circle);
+        setTimeout(() => circle.remove(), 500);
+      });
+    }
+
+    // Fade/slide-in animation for project sections
+    function revealProjectsOnScroll() {
+      const sections = document.querySelectorAll('.project-section');
+      const trigger = window.innerHeight * 0.92;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealProjectsOnScroll);
+    window.addEventListener('DOMContentLoaded', revealProjectsOnScroll);
+
+    // Fade/slide-in animation for testimonial cards
+    function revealTestimonialsOnScroll() {
+      const cards = document.querySelectorAll('.testimonial-card');
+      const trigger = window.innerHeight * 0.92;
+      cards.forEach(card => {
+        const top = card.getBoundingClientRect().top;
+        if (top < trigger) {
+          card.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealTestimonialsOnScroll);
+    window.addEventListener('DOMContentLoaded', revealTestimonialsOnScroll);
+  </script>
+</body>
+</html>
